@@ -26,7 +26,7 @@ public class UserController {
     @GetMapping("/users/new")
     public String showNewForm(Model model) {
         model.addAttribute("user", new User());
-        model.addAttribute("pageTitle","Add New User");
+        model.addAttribute("pageTitle","Thêm người dùng");
         return "user_form";
     }
 
@@ -42,10 +42,10 @@ public class UserController {
         try {
             User user = service.get(id);
             model.addAttribute("user", user);
-            model.addAttribute("pageTitle", "Edit User (ID: " + id + ")");
+            model.addAttribute("pageTitle", "Sửa người dùng có ID: " + id);
             return "user_form";
         } catch (UserNotFoundException e) {
-            ra.addFlashAttribute("message", "User with ID " + id + " not found!");
+            ra.addFlashAttribute("message", "Không thấy người dùng có ID " + id);
             return "redirect:/users";
         }
     }

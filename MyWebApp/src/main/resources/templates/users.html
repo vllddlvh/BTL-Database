@@ -2,19 +2,81 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Manage Users</title>
+  <title>Người dùng</title>
   <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0/css/bootstrap.min.css}" />
+  <style>
+    /* Đổi màu tiêu đề và tăng kích thước chữ */
+    h2 {
+      color: rgb(80, 141, 78);
+      font-size: 60px; /* Tăng kích thước chữ cho tiêu đề */
+      margin-top: 20px; /* Thêm khoảng cách từ lề trên cho tiêu đề */
+      margin-bottom: 25px; /* Thêm khoảng cách từ tiêu đề đến các khung dưới */
+    }
+
+    /* Khung cho các liên kết và bảng - thay đổi màu nền, viền, padding */
+    .link-box {
+      border: 2px solid rgb(128, 175, 129);
+      background-color: rgb(128, 175, 129);
+      padding: 10px;
+      margin-top: 5px;
+      margin-bottom: 5px;
+      display: inline-block;
+      width: 25%; /* Giảm chiều rộng của khung */
+      text-align: center;
+    }
+
+    .link-box a {
+      display: block;
+      margin: 5px 0;
+      text-decoration: none;
+      color: white;
+      font-size: 16px; /* Giảm kích thước chữ của các liên kết */
+    }
+
+    .link-box a:hover {
+      color: black;
+    }
+
+    .alert-success {
+      background-color: rgb(80, 141, 78); /* Màu nền cho thông báo thành công */
+      color: white; /* Màu chữ trắng cho thông báo */
+      margin-bottom: 20px; /* Khoảng cách dưới thông báo */
+    }
+
+    table {
+      margin-top: 20px;
+      width: 100%;
+    }
+
+    table th, table td {
+      text-align: center;
+    }
+
+    .table-bordered {
+      border: 2px solid rgb(128, 175, 129);
+    }
+
+    .h4 {
+      color: rgb(128, 175, 129);
+    }
+
+    .h4:hover {
+      color: black;
+    }
+  </style>
 </head>
 <body>
 <div class="container-fluid text-center">
-  <div><h2>Manage Users</h2></div>
-  <div class="m-2">
-    <a class="h3" th:href="@{/users/new}">Add New User</a>
+  <div><h2>Người dùng</h2></div>
+
+  <div class="link-box m-2">
+    <a class="h3" th:href="@{/users/new}">Thêm người dùng</a>
   </div>
 
   <div th:if="${message}" class="alert-success text-center">
     [[${message}]]
   </div>
+
   <div>
     <table class="table table-bordered">
       <thead>
@@ -34,8 +96,8 @@
           <td>[[${user.firstName}]]</td>
           <td>[[${user.lastName}]]</td>
           <td>
-            <a class ="h4 mr-3" th:href="@{'/users/edit/' + ${user.id}}">Edit</a>
-            <a class ="h4" th:href="@{'/users/edit/' + ${user.id}}">Delete</a>
+            <a class="h4 m-3" th:href="@{'/users/edit/' + ${user.id}}">Sửa</a>
+            <a class="h4" th:href="@{'/users/delete/' + ${user.id}}">Xóa</a>
           </td>
         </tr>
       </th:block>
