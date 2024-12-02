@@ -2,14 +2,54 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Welcome to My Application</title>
+    <title>Quản lý thư viện</title>
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0/css/bootstrap.min.css}" />
+    <style>
+        /* Đổi màu tiêu đề đầu tiên thành màu [128, 175, 129] và tăng kích thước chữ */
+        h1 {
+            color: rgb(80,141,78);
+            font-size: 60px; /* Tăng kích thước chữ cho tiêu đề */
+            margin-top: 20px; /* Thêm khoảng cách từ lề trên cho tiêu đề */
+            margin-bottom: 25px; /* Thêm khoảng cách từ tiêu đề đến các khung dưới */
+        }
+        /* Khung cho từng liên kết - giảm kích thước khung */
+        .link-box {
+            border: 2px solid rgb(128,175,129);
+            background-color: rgb(128,175,129);
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            display: inline-block;
+            width: 50%; /* Giảm chiều rộng của khung */
+            text-align: center;
+        }
+        .link-box a {
+            display: block;
+            margin: 5px 0;
+            text-decoration: none;
+            color: white;
+            font-size: 16px; /* Giảm kích thước chữ của các liên kết */
+        }
+        .link-box a:hover {
+            color: black;
+        }
+    </style>
 </head>
 <body>
 <div class="container-fluid text-center">
-   <h1>Welcome to my application</h1>
-   <a class="h2" th:href="@{/users}">Manage Users</a><br>
-    <a class="h3" th:href="@{/books}">Manage Books</a>
+    <h1>Welcome to my application</h1>
+    <div class="link-box">
+        <a class="h2" th:href="@{/users}">Người dùng</a>
+    </div>
+    <div class="link-box">
+        <a class="h3" th:href="@{/books}">Sách</a>
+    </div>
+    <div class="link-box">
+        <a class="h4" th:href="@{/borrow}">Mượn trả sách</a>
+    </div>
+    <div class="link-box">
+        <a class="h5" th:href="@{/feedBack}">Đánh giá của người dùng</a>
+    </div>
 </div>
 </body>
 </html>
