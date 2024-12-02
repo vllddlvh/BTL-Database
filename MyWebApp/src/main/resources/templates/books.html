@@ -1,10 +1,116 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Vai loz</title>
+    <title>Danh sách sách</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0/css/bootstrap.min.css}" />
+    <style>
+        /* Đổi màu tiêu đề và tăng kích thước chữ */
+        h2 {
+            color: rgb(80, 141, 78);
+            font-size: 60px;
+            margin-top: 20px;
+            margin-bottom: 25px;
+        }
+
+        /* Khung cho các liên kết và bảng */
+        .link-box {
+            border: 2px solid rgb(128, 175, 129);
+            background-color: rgb(128, 175, 129);
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+            display: inline-block;
+            width: 25%;
+            text-align: center;
+        }
+
+        .link-box a {
+            display: block;
+            margin: 5px 0;
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+        }
+
+        .link-box a:hover {
+            color: black;
+        }
+
+        .alert-success {
+            background-color: rgb(80, 141, 78);
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        table {
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        table th, table td {
+            text-align: center;
+        }
+
+        .table-bordered {
+            border: 2px solid rgb(128, 175, 129);
+        }
+
+        .h4 {
+            color: rgb(128, 175, 129);
+        }
+
+        .h4:hover {
+            color: black;
+        }
+    </style>
 </head>
 <body>
+<div class="container-fluid text-center">
+    <div><h2>Danh sách sách</h2></div>
 
+    <!-- Liên kết đến trang thêm sách -->
+    <div class="link-box m-2">
+        <a class="h3" th:href="@{/books/new}">Thêm sách</a>
+    </div>
+
+    <!-- Hiển thị thông báo nếu có -->
+    <div th:if="${message}" class="alert-success text-center">
+        [[${message}]]
+    </div>
+
+    <!-- Bảng danh sách sách -->
+    <div>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Tên sách</th>
+                <th>Tác giả</th>
+                <th>Ngày phát hành</th>
+                <th>Thể loại</th>
+                <th>Số lượng sách</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <th:block th:each="book : ${listBooks}">
+                <tr>
+                    <td>[[${book.id}]]</td>
+                    <td>[[${book.title}]]</td>
+                    <td>[[${book.author}]]</td>
+                    <td>[[${book.publishedYear}]]</td>
+                    <td>[[${book.genre}]]</td>
+                    <td>[[${book.quantity}]]</td>
+                    <td>
+                        <a class="h4 m-3" th:href="@{'/books/edit/' + ${book.id}}">Sửa</a>
+                        <a class="h4" th:href="@{'/books/delete/' + ${book.id}}">Xóa</a>
+                    </td>
+                </tr>
+            </th:block>
+            </tbody>
+        </table>
+    </div>
+</div>
 </body>
 </html>

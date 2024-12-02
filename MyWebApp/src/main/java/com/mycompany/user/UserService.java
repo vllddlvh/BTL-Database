@@ -26,4 +26,14 @@ public class UserService {
 
         throw new UserNotFoundException("Khong tim thay ID:" + id);
     }
+
+    // Phương thức xóa người dùng theo ID
+    public void delete(Integer id) throws UserNotFoundException {
+        Optional<User> user = repo.findById(id);
+        if (user.isPresent()) {
+            repo.deleteById(id); // Xóa người dùng từ cơ sở dữ liệu
+        } else {
+            throw new UserNotFoundException("Không tìm thấy người dùng với ID: " + id);
+        }
+    }
 }

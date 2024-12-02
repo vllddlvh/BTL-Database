@@ -23,8 +23,15 @@ public class BookService {
         if(result.isPresent()) {
             return result.get();
         }
-
         throw new BookNotFoundException("Không tìm thấy sách với ID: " + id);
     }
-}
 
+    public void delete(Integer id) throws BookNotFoundException {
+        Optional<Book> result = repo.findById(id);
+        if(result.isPresent()) {
+            repo.delete(result.get());
+        } else {
+            throw new BookNotFoundException("Không tìm thấy sách với ID: " + id);
+        }
+    }
+}

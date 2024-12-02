@@ -50,4 +50,15 @@ public class UserController {
         }
     }
 
+    // Phương thức để xóa người dùng
+    @GetMapping("/users/delete/{id}")
+    public String deleteUser(@PathVariable("id") Integer id, RedirectAttributes ra) {
+        try {
+            service.delete(id); // Gọi dịch vụ xóa người dùng theo ID
+            ra.addFlashAttribute("message", "Người dùng với ID " + id + " đã bị xóa.");
+        } catch (UserNotFoundException e) {
+            ra.addFlashAttribute("message", "Không thể tìm thấy người dùng với ID " + id);
+        }
+        return "redirect:/users";
+    }
 }
