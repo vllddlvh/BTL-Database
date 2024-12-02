@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Người dùng</title>
+  <title>Danh sách người dùng</title>
   <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0/css/bootstrap.min.css}" />
   <style>
     /* Đổi màu tiêu đề và tăng kích thước chữ */
@@ -13,77 +13,89 @@
       margin-bottom: 25px;
     }
 
-    /* Tùy chỉnh bảng */
-    table {
-      margin-top: 20px;
-      width: 100%;
-      border-collapse: collapse;
+    /* Link thêm người dùng */
+    .link-box {
+      border: 2px solid rgb(128, 175, 129);
+      background-color: rgb(128, 175, 129);
+      padding: 10px;
+      margin: 20px 0;
+      display: inline-block;
+      text-align: center;
     }
 
-    table th {
+    .link-box a {
+      text-decoration: none;
+      color: white;
+      font-size: 18px;
+    }
+
+    .link-box a:hover {
+      color: black;
+    }
+
+    /* Thông báo */
+    .alert-success {
       background-color: rgb(80, 141, 78);
       color: white;
       padding: 10px;
-      text-align: center;
+      margin-bottom: 20px;
     }
 
-    table td {
-      padding: 8px;
-      text-align: center;
+    /* Bảng */
+    .table thead th {
+      background-color: rgb(128, 175, 129);
+      color: white;
+    }
+
+    .table td, .table th {
       vertical-align: middle;
     }
 
-    .table-bordered {
-      border: 2px solid rgb(80, 141, 78);
-    }
-
-    .table-striped tbody tr:nth-of-type(odd) {
-      background-color: #f9f9f9;
-    }
-
-    /* Nút Sửa và Xóa */
-    .btn-edit {
-      background-color: rgb(60, 120, 60);
-      color: white;
-      border: none;
-      padding: 5px 10px;
+    /* Nút sửa/xóa */
+    .action-btn {
       font-size: 14px;
+      padding: 5px 10px;
+      margin: 0 5px;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-edit {
+      background-color: rgb(80, 141, 78);
+      color: white;
     }
 
     .btn-edit:hover {
-      background-color: rgb(50, 110, 50);
+      background-color: rgb(60, 120, 60);
     }
 
     .btn-delete {
-      background-color: rgb(220, 53, 69);
+      background-color: rgb(200, 50, 50);
       color: white;
-      border: none;
-      padding: 5px 10px;
-      font-size: 14px;
     }
 
     .btn-delete:hover {
-      background-color: rgb(200, 40, 60);
+      background-color: rgb(180, 30, 30);
     }
   </style>
 </head>
 <body>
 <div class="container-fluid text-center">
-  <div><h2>Người dùng</h2></div>
+  <div><h2>Danh sách người dùng</h2></div>
 
   <!-- Liên kết đến trang thêm người dùng -->
-  <div class="text-center my-3">
-    <a class="btn btn-primary btn-lg" th:href="@{/users/new}" role="button">Thêm người dùng</a>
+  <div class="link-box">
+    <a th:href="@{/users/new}">Thêm người dùng</a>
   </div>
 
   <!-- Hiển thị thông báo nếu có -->
-  <div th:if="${message}" class="alert alert-success text-center">
+  <div th:if="${message}" class="alert-success">
     [[${message}]]
   </div>
 
   <!-- Bảng danh sách người dùng -->
-  <div>
-    <table class="table table-bordered table-striped">
+  <div class="table-responsive">
+    <table class="table table-bordered table-hover">
       <thead>
       <tr>
         <th>ID</th>
@@ -101,9 +113,8 @@
           <td>[[${user.firstName}]]</td>
           <td>[[${user.lastName}]]</td>
           <td>
-            <a th:href="@{'/users/edit/' + ${user.id}}" class="btn btn-edit">Sửa</a>
-            <a th:href="@{'/users/delete/' + ${user.id}}" class="btn btn-delete"
-               onclick="return confirm('Bạn có chắc chắn muốn xóa?');">Xóa</a>
+            <button class="action-btn btn-edit" th:onclick="|window.location.href='/users/edit/' + ${user.id}|">Sửa</button>
+            <button class="action-btn btn-delete" th:onclick="|if(confirm('Bạn có chắc chắn xóa?')) window.location.href='/users/delete/' + ${user.id}|">Xóa</button>
           </td>
         </tr>
       </th:block>
