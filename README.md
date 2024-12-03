@@ -1,7 +1,8 @@
 **WEB QUẢN LÝ THƯ VIỆN**
 
-_Gồm các chức năng chính như quản lý thành viên, quản lý sách, cho mượn trả sách_
-_Sử dụng SpringBoot, MySQL, JPA, Hibernate, Thymeleaf and Bootstrap_
+_Gồm các chức năng chính như quản lý thành viên, quản lý sách, cho mượn trả sách_.
+
+_Sử dụng SpringBoot, MySQL, JPA, Hibernate, Thymeleaf and Bootstrap_.
 
 **Màn hình chính** 
 
