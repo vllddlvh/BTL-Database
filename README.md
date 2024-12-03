@@ -31,6 +31,10 @@ _Sử dụng SpringBoot, MySQL, JPA, Hibernate, Thymeleaf and Bootstrap_.
 ![Mượn sách](https://i.imgur.com/w7KLreP.png) 
 
 **Quản lý góp ý, đánh giá của bạn đọc**
+![Hiển thị đánh giá] (https://imgur.com/a/wVwaPjc)
+![Thêm đánh giá] (https://imgur.com/a/AEQUKuG)
+![Thêm đánh giá - Kết quả] (https://imgur.com/a/C9lY2XT)
+![Xóa đánh giá] (https://imgur.com/a/AZNl5i8)
 
 **Hồ sơ tác giả**
 ![Thêm tác giả] (https://imgur.com/a/fqTuHwh)
