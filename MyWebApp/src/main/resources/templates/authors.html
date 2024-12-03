@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Danh sách tác giả</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0/css/bootstrap.min.css}" />
+    <style>
+        /* Đổi màu tiêu đề và tăng kích thước chữ */
+        h2 {
+            color: rgb(80, 141, 78);
+            font-size: 60px;
+            margin-top: 20px;
+            margin-bottom: 25px;
+        }
+
+        /* Link thêm tác giả */
+        .link-box {
+            border: 2px solid rgb(128, 175, 129);
+            background-color: rgb(128, 175, 129);
+            padding: 10px;
+            margin: 20px 0;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .link-box a {
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+        }
+
+        .link-box a:hover {
+            color: black;
+        }
+
+        /* Thông báo */
+        .alert-success {
+            background-color: rgb(80, 141, 78);
+            color: white;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        /* Bảng */
+        .table thead th {
+            background-color: rgb(128, 175, 129);
+            color: white;
+        }
+
+        .table td, .table th {
+            vertical-align: middle;
+        }
+
+        /* Nút sửa/xóa */
+        .action-btn {
+            font-size: 14px;
+            padding: 5px 10px;
+            margin: 0 5px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-edit {
+            background-color: rgb(80, 141, 78);
+            color: white;
+        }
+
+        .btn-edit:hover {
+            background-color: rgb(60, 120, 60);
+        }
+
+        .btn-delete {
+            background-color: rgb(200, 50, 50);
+            color: white;
+        }
+
+        .btn-delete:hover {
+            background-color: rgb(180, 30, 30);
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid text-center">
+    <h2>Danh sách tác giả</h2>
+
+    <!-- Liên kết đến trang thêm tác giả -->
+    <div class="link-box">
+        <a th:href="@{/authors/new}">Thêm tác giả</a>
+    </div>
+
+    <!-- Hiển thị thông báo nếu có -->
+    <div th:if="${message}" class="alert-success">
+        [[${message}]]
+    </div>
+
+    <!-- Bảng danh sách tác giả -->
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Tên tác giả</th>
+                <th>Ngày sinh</th>
+                <th>Tiểu sử</th>
+                <th>Hành động</th>
+            </tr>
+            </thead>
+            <tbody>
+            <th:block th:each="author : ${listAuthors}">
+                <tr>
+                    <td>[[${author.id}]]</td>
+                    <td>[[${author.name}]]</td>
+                    <td>[[${author.dateOfBirth}]]</td>
+                    <td>[[${author.biography}]]</td>
+                    <td>
+                        <button class="action-btn btn-edit" th:onclick="|window.location.href='/authors/edit/' + ${author.id}|">Sửa</button>
+                        <button class="action-btn btn-delete" th:onclick="|if(confirm('Bạn có chắc chắn xóa?')) window.location.href='/authors/delete/' + ${author.id}|">Xóa</button>
+                    </td>
+                </tr>
+            </th:block>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

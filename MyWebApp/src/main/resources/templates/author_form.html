@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>[[${pageTitle}]]</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0/css/bootstrap.min.css}" />
+    <style>
+        /* Đổi màu tiêu đề và tăng kích thước chữ */
+        h2 {
+            color: rgb(80, 141, 78);
+            font-size: 60px;
+            margin-top: 20px;
+            margin-bottom: 25px;
+        }
+
+        /* Nút Save */
+        .btn-primary {
+            background-color: rgb(80, 141, 78);
+            border-color: rgb(80, 141, 78);
+        }
+
+        .btn-primary:hover {
+            background-color: rgb(60, 120, 60);
+            border-color: rgb(60, 120, 60);
+        }
+
+        /* Form */
+        .form-group label {
+            font-weight: bold;
+        }
+
+        .form-group input, .form-group textarea {
+            border-radius: 5px;
+        }
+
+        /* Nút Hủy */
+        .btn-secondary {
+            background-color: rgb(200, 50, 50);
+            border-color: rgb(200, 50, 50);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgb(180, 30, 30);
+            border-color: rgb(180, 30, 30);
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2 class="text-center">[[${pageTitle}]]</h2>
+
+    <form th:action="@{/authors/save}" method="post" th:object="${author}">
+        <div class="form-group">
+            <label for="name">Tên tác giả:</label>
+            <input type="text" th:field="*{name}" class="form-control" required />
+        </div>
+        <div class="form-group">
+            <label for="dateOfBirth">Ngày sinh:</label>
+            <input type="date" th:field="*{dateOfBirth}" class="form-control" />
+        </div>
+        <div class="form-group">
+            <label for="biography">Tiểu sử:</label>
+            <textarea th:field="*{biography}" class="form-control" rows="3"></textarea>
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary mt-3">Lưu</button>
+            <a th:href="@{/authors}" class="btn btn-secondary mt-3">Hủy</a>
+        </div>
+    </form>
+</div>
+</body>
+</html>
