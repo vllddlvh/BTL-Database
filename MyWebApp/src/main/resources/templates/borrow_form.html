@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Thêm mới bản ghi mượn sách</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0/css/bootstrap.min.css}" />
+    <style>
+        h2 {
+            color: rgb(80, 141, 78);
+            font-size: 40px;
+            margin-top: 20px;
+            margin-bottom: 25px;
+        }
+
+        .btn-primary {
+            background-color: rgb(80, 141, 78);
+            border-color: rgb(80, 141, 78);
+        }
+
+        .btn-primary:hover {
+            background-color: rgb(60, 120, 60);
+            border-color: rgb(60, 120, 60);
+        }
+
+        .btn-secondary {
+            margin-left: 10px;
+        }
+
+        .form-group label {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="text-center">
+        <h2>Thêm mới bản ghi mượn sách</h2>
+    </div>
+
+    <form th:action="@{/borrow/save}" method="post" th:object="${borrowRecord}"
+          style="max-width: 500px; margin: 0 auto;">
+        <div class="border border-secondary rounded p-3">
+            <!-- Mã mượn sách -->
+            <div class="form-group row mb-3">
+                <label class="col-sm-4 col-form-label" for="id">Mã mượn sách:</label>
+                <div class="col-sm-8">
+                    <input type="number" th:field="*{id}" id="id" class="form-control" readonly placeholder="Hệ thống tự sinh nếu để trống"/>
+                </div>
+            </div>
+
+            <!-- Mã người dùng -->
+            <div class="form-group row mb-3">
+                <label class="col-sm-4 col-form-label" for="userId">Mã người dùng:</label>
+                <div class="col-sm-8">
+                    <input type="number" th:field="*{user.id}" id="userId" class="form-control" required placeholder="Nhập mã người dùng"/>
+                </div>
+            </div>
+
+            <!-- Mã sách -->
+            <div class="form-group row mb-3">
+                <label class="col-sm-4 col-form-label" for="bookId">Mã sách:</label>
+                <div class="col-sm-8">
+                    <input type="number" th:field="*{book.id}" id="bookId" class="form-control" required placeholder="Nhập mã sách"/>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Lưu</button>
+                <a th:href="@{/borrow}" class="btn btn-secondary">Hủy</a>
+            </div>
+        </div>
+    </form>
+</div>
+</body>
+</html>
