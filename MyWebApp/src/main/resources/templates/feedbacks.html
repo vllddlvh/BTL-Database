@@ -1,10 +1,122 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Danh sách Feedbacks</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0/css/bootstrap.min.css}" />
+    <style>
+        h2 {
+            color: rgb(80, 141, 78);
+            font-size: 60px;
+            margin-top: 20px;
+            margin-bottom: 25px;
+        }
+
+        .link-box {
+            border: 2px solid rgb(128, 175, 129);
+            background-color: rgb(128, 175, 129);
+            padding: 10px;
+            margin: 20px 0;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .link-box a {
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+        }
+
+        .link-box a:hover {
+            color: black;
+        }
+
+        .alert-success {
+            background-color: rgb(80, 141, 78);
+            color: white;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        .table thead th {
+            background-color: rgb(128, 175, 129);
+            color: white;
+        }
+
+        .table td, .table th {
+            vertical-align: middle;
+        }
+
+        .action-btn {
+            font-size: 14px;
+            padding: 5px 10px;
+            margin: 0 5px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-edit {
+            background-color: rgb(80, 141, 78);
+            color: white;
+        }
+
+        .btn-edit:hover {
+            background-color: rgb(60, 120, 60);
+        }
+
+        .btn-delete {
+            background-color: rgb(200, 50, 50);
+            color: white;
+        }
+
+        .btn-delete:hover {
+            background-color: rgb(180, 30, 30);
+        }
+    </style>
 </head>
 <body>
+<div class="container-fluid text-center">
+    <div><h2>Danh sách Feedbacks</h2></div>
 
+    <div class="link-box">
+        <a th:href="@{/feedbacks/new}">Thêm Feedback</a>
+    </div>
+
+    <div th:if="${message}" class="alert-success">
+        [[${message}]]
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Người dùng</th>
+                <th>Sách</th>
+                <th>Nội dung Feedback</th>
+                <th>Đánh giá</th>
+                <th>Ngày tạo</th>
+                <th>Hành động</th>
+            </tr>
+            </thead>
+            <tbody>
+            <th:block th:each="feedback : ${listFeedbacks}">
+                <tr>
+                    <td>[[${feedback.id}]]</td>
+                    <td>[[${feedback.userName}]]</td>
+                    <td>[[${feedback.bookTitle}]]</td>
+                    <td>[[${feedback.feedbackText}]]</td>
+                    <td>[[${feedback.rating}]]</td>
+                    <td>[[${feedback.createdAt}]]</td>
+                    <td>
+                        <button class="action-btn btn-edit" th:onclick="|window.location.href='/feedbacks/edit/' + ${feedback.id}|">Sửa</button>
+                        <button class="action-btn btn-delete" th:onclick="|if(confirm('Bạn có chắc chắn xóa?')) window.location.href='/feedbacks/delete/' + ${feedback.id}|">Xóa</button>
+                    </td>
+                </tr>
+            </th:block>
+            </tbody>
+        </table>
+    </div>
+</div>
 </body>
 </html>

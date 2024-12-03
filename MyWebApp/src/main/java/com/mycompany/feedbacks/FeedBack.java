@@ -6,6 +6,10 @@ import com.mycompany.user.User;
 
 import java.sql.Timestamp;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+
+
 @Entity
 @Table(name = "feedbacks")
 public class FeedBack {
@@ -29,6 +33,13 @@ public class FeedBack {
 
     @Column(name = "created_at", nullable = false)
     private Timestamp createdAt;
+
+    @PrePersist
+    public void prePersist() {
+        if (this.createdAt == null) {
+            this.createdAt = new Timestamp(System.currentTimeMillis()); // Gán thời gian hiện tại
+        }
+    }
 
     public Integer getId() {
         return id;
