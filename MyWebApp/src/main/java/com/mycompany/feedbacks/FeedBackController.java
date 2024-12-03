@@ -1,5 +1,8 @@
 package com.mycompany.feedbacks;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,13 +32,17 @@ public class FeedBackController {
         return "feedback_form"; // Tên file HTML cho form thêm feedback
     }
 
-    // Lưu hoặc cập nhật Feedback
+
     @PostMapping("/feedbacks/save")
     public String saveFeedBack(FeedBack feedback, RedirectAttributes ra) {
+        if (feedback.getCreatedAt() == null) {
+            feedback.setCreatedAt(Timestamp.valueOf(LocalDateTime.now()));  // Gán thời gian hiện tại khi tạo mới
+        }
         service.save(feedback);
         ra.addFlashAttribute("message", "Feedback đã được lưu thành công");
         return "redirect:/feedbacks";
     }
+
 
     // Hiển thị form sửa Feedback theo ID
     @GetMapping("/feedbacks/edit/{id}")
