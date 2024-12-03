@@ -30,6 +30,21 @@ _Sử dụng SpringBoot, MySQL, JPA, Hibernate, Thymeleaf and Bootstrap_.
 ![Mượn trả sách](https://i.imgur.com/SCxwq2H.png)
 ![Mượn sách](https://i.imgur.com/w7KLreP.png) 
 
+**Quản lý góp ý, đánh giá của bạn đọc**
+
+**Hồ sơ tác giả**
+![Thêm tác giả] (https://imgur.com/a/fqTuHwh)
+![Chỉnh sửa thông tin] (https://imgur.com/a/4TgLemC)
+![Xóa hồ sơ] (https://imgur.com/a/spDK5UY)
+
+**Các thể loại sách**
+![Tổng hợp] (https://imgur.com/a/xltB5Yq)
+![Thêm] (https://imgur.com/a/87sWEkP)
+![Chỉnh sửa] (https://imgur.com/a/6uGCcEm)
+![Xóa] (https://imgur.com/a/CiQkozs)
+
+
+
 
 **Mô hình EER chính**
 ![Mô hình EER](https://i.imgur.com/TYJ5cy3.png) 
