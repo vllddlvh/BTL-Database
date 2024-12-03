@@ -1,10 +1,142 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mượn trả sách</title>
+    <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0/css/bootstrap.min.css}" />
+    <style>
+        h2 {
+            color: rgb(80, 141, 78);
+            font-size: 60px;
+            margin-top: 20px;
+            margin-bottom: 25px;
+        }
+
+        .link-box {
+            border: 2px solid rgb(128, 175, 129);
+            background-color: rgb(128, 175, 129);
+            padding: 10px;
+            margin: 20px 0;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .link-box a {
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+        }
+
+        .link-box a:hover {
+            color: black;
+        }
+
+        .alert-success {
+            background-color: rgb(80, 141, 78);
+            color: white;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+
+        .table thead th {
+            background-color: rgb(128, 175, 129);
+            color: white;
+        }
+
+        .table td, .table th {
+            vertical-align: middle;
+        }
+
+        .btn-success {
+            background-color: rgb(80, 141, 78);
+            color: white;
+        }
+
+        .btn-success:hover {
+            background-color: rgb(60, 120, 60);
+        }
+
+        .btn-secondary:hover {
+            background-color: rgb(190, 190, 190);
+        }
+    </style>
 </head>
 <body>
+<div class="container-fluid text-center">
+    <h2>Mượn trả sách</h2>
 
+    <!-- Link mượn sách -->
+    <div class="link-box">
+        <a th:href="@{/borrow/new}">Mượn sách mới</a>
+    </div>
+
+    <!-- Hiển thị thông báo nếu có -->
+    <div th:if="${message}" class="alert-success">
+        [[${message}]]
+    </div>
+
+    <!-- Bảng danh sách bản ghi mượn -->
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover table-sm">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Người dùng</th>
+                <th>Sách</th>
+                <th>Ngày mượn</th>
+                <th>Ngày trả</th>
+                <th>Trạng thái</th>
+                <th>Hành động</th>
+            </tr>
+            </thead>
+            <tbody>
+            <th:block th:each="record : ${listBorrowRecords}">
+                <tr>
+                    <td>[[${record.id}]]</td>
+                    <td>[[${record.user.firstName}]] [[${record.user.lastName}]]</td>
+                    <td>[[${record.book.title}]]</td>
+                    <td>[[${#dates.format(record.borrowDate, 'dd-MM-yyyy')}]]</td>
+                    <td th:text="${record.returnDate != null ? #dates.format(record.returnDate, 'dd-MM-yyyy') : 'Đã mượn'}"></td>
+                    <td th:classappend="${record.status == 'Đã mượn'} ? 'text-danger' : 'text-success'">
+                        [[${record.status}]]
+                    </td>
+                    <td>
+                        <!-- Nút trả sách -->
+                        <button th:if="${record.status == 'Đã mượn'}"
+                                class="btn btn-success btn-sm"
+                                data-bs-toggle="modal"
+                                th:data-bs-target="'#returnModal' + ${record.id}">
+                            Trả sách
+                        </button>
+                    </td>
+                </tr>
+
+                <!-- Modal xác nhận trả sách -->
+                <div th:if="${record.status == 'Đang mượn'}" class="modal fade" th:id="'returnModal' + ${record.id}" tabindex="-1" aria-labelledby="returnModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="returnModalLabel">Xác nhận trả sách</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                Bạn có chắc chắn muốn trả sách <strong>[[${record.book.title}]]</strong> không?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                                <a th:href="'/borrow/return/' + ${record.id}" class="btn btn-success">Xác nhận</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </th:block>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Bootstrap JS -->
+<script th:src="@{/webjars/bootstrap/5.3.0/js/bootstrap.bundle.min.js}"></script>
 </body>
 </html>
