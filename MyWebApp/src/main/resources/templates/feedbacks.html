@@ -5,6 +5,7 @@
     <title>Danh sách Feedbacks</title>
     <link rel="stylesheet" th:href="@{/webjars/bootstrap/5.3.0/css/bootstrap.min.css}" />
     <style>
+        /* Đổi màu tiêu đề và tăng kích thước chữ */
         h2 {
             color: rgb(80, 141, 78);
             font-size: 60px;
@@ -12,6 +13,7 @@
             margin-bottom: 25px;
         }
 
+        /* Link thêm feedback */
         .link-box {
             border: 2px solid rgb(128, 175, 129);
             background-color: rgb(128, 175, 129);
@@ -31,6 +33,7 @@
             color: black;
         }
 
+        /* Thông báo */
         .alert-success {
             background-color: rgb(80, 141, 78);
             color: white;
@@ -38,6 +41,7 @@
             margin-bottom: 20px;
         }
 
+        /* Bảng */
         .table thead th {
             background-color: rgb(128, 175, 129);
             color: white;
@@ -47,6 +51,7 @@
             vertical-align: middle;
         }
 
+        /* Nút sửa/xóa */
         .action-btn {
             font-size: 14px;
             padding: 5px 10px;
@@ -78,14 +83,17 @@
 <div class="container-fluid text-center">
     <div><h2>Danh sách Feedbacks</h2></div>
 
+    <!-- Liên kết đến trang thêm Feedback -->
     <div class="link-box">
         <a th:href="@{/feedbacks/new}">Thêm Feedback</a>
     </div>
 
+    <!-- Hiển thị thông báo nếu có -->
     <div th:if="${message}" class="alert-success">
         [[${message}]]
     </div>
 
+    <!-- Bảng danh sách Feedbacks -->
     <div class="table-responsive">
         <table class="table table-bordered table-hover">
             <thead>
@@ -103,8 +111,8 @@
             <th:block th:each="feedback : ${listFeedbacks}">
                 <tr>
                     <td>[[${feedback.id}]]</td>
-                    <td>[[${feedback.userName}]]</td>
-                    <td>[[${feedback.bookTitle}]]</td>
+                    <td>[[${feedback.user.firstName}]]</td>
+                    <td>[[${feedback.book.title}]]</td>
                     <td>[[${feedback.feedbackText}]]</td>
                     <td>[[${feedback.rating}]]</td>
                     <td>[[${feedback.createdAt}]]</td>
